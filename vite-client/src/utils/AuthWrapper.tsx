@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 
 function AuthWrapper(WrapperComponent: any) {
@@ -22,10 +23,10 @@ function AuthWrapper(WrapperComponent: any) {
                         setLoggedIn(true);
                     } else if (res.status === 401) {
                         setLoading(false);
-                        setSessionExpired(true);
-                    } else {
-                        setLoading(true);
                         setAccessDenied(true);
+                    } else {
+                        setLoading(false);
+                        setSessionExpired(true);
                     }
                 } catch (error) {
                     setLoading(false);
@@ -34,6 +35,23 @@ function AuthWrapper(WrapperComponent: any) {
             }
             verifyAuthToken();
         }, [])
+
+        const extendSession = async () => {
+            try {
+                const res = await fetch("http://localhost:8000/api/v1/auth/refresh_token", {
+                    method: "POST",
+                    credentials: "include"
+                })
+                if (res.status === 200) {
+                    setLoggedIn(true);
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500)
+                }
+            } catch (e) {
+
+            }
+        }
 
         if (loading) {
             return (
@@ -55,6 +73,7 @@ function AuthWrapper(WrapperComponent: any) {
             return (
                 <section className="flex h-screen justify-center items-center text-xl">
                     Sorry, your session has expired.
+                    <Button onClick={extendSession} type="default">extend your session</Button>
                 </section>
             )
         }
