@@ -1,11 +1,11 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
-type Props = {}
+type Props = {};
 
-export default function AuthenticationLayout({ }: Props) {
-    return (
-        <div className='flex h-screen justify-center items-center'>
-            <Outlet />
-        </div>
-    )
+export default function AuthenticationLayout({}: Props) {
+  return (
+    <div className="flex h-screen justify-center items-center">
+      <Outlet />
+    </div>
+  );
 }
