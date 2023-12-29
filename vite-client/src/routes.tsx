@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+import ChangePassword from './pages/ChangePassword';
 const HomePage = lazy(() => import('./pages/Home'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 const AuthenticationLayout = lazy(
@@ -35,6 +36,10 @@ const routes = createBrowserRouter([
     element: <AppLayout />,
     children: [{ element: <AppIndexPage />, index: true }],
   },
+  {
+    path: "/change_password/:reset_token",
+    element: <ChangePassword />
+  }
 ]);
 
 export default routes;
