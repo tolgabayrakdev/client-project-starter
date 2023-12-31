@@ -22,10 +22,10 @@ function AuthWrapper(WrapperComponent: any) {
             setLoggedIn(true);
           } else if (res.status === 401) {
             setLoading(false);
-            setAccessDenied(true);
-          } else {
-            setLoading(false);
             setSessionExpired(true);
+          } else if (res.status == 403) {
+            setLoading(false);
+            setAccessDenied(true);
           }
         } catch (error) {
           setLoading(false);
