@@ -6,6 +6,7 @@ Hi, this repo contains a ready-made package for basic authentication(JWT) operat
 - Register 
 - Private Router
 - Forget Password
+- Extend Session(Refresh token)
 
 You can customize and use it with your own backend API.
 
