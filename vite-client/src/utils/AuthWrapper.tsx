@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Loading from '../components/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 
 function AuthWrapper(WrapperComponent: any) {
@@ -9,7 +9,7 @@ function AuthWrapper(WrapperComponent: any) {
     const [loading, setLoading] = useState(true);
     const [sessionExpired, setSessionExpired] = useState(false);
     const [accessDenied, setAccessDenied] = useState(false);
-
+    const navigate = useNavigate();
     useEffect(() => {
       const verifyAuthToken = async () => {
         try {
@@ -68,11 +68,12 @@ function AuthWrapper(WrapperComponent: any) {
       );
     } else if (sessionExpired) {
       return (
-        <section className="flex h-screen justify-center items-center text-xl">
+        <section className="flex h-screen flex-col justify-center items-center text-xl">
           Sorry, your session has expired.
-          <Button onClick={extendSession} type="default">
-            extend your session
+          <Button className='mt-1 text-green-600' onClick={extendSession} type="default">
+            Extend your session
           </Button>
+          <Button className='mt-1 w-40 text-green-600' type="default" onClick={() => navigate("/authentication/login")}> Go to login page</Button>
         </section>
       );
     }
