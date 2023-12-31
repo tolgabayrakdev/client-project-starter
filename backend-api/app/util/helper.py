@@ -31,7 +31,7 @@ class Helper:
     @classmethod
     def generate_refresh_token(cls, payload: dict) -> str:
         return jwt.encode(
-            {"payload": payload, "exp": int(time.time()) + 100},
+            {"payload": payload, "exp": int(time.time()) + 10000},
             "secret_key",
             algorithm="HS256",
         )
