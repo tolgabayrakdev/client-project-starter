@@ -2,7 +2,7 @@ from ..database import SessionLocal
 from ..model import User
 from app.util.helper import Helper
 from sqlalchemy.exc import SQLAlchemyError
-from fastapi import HTTPException, Request
+from fastapi import HTTPException
 from app.schema.auth_schema import RegisterUser
 
 db = SessionLocal()
