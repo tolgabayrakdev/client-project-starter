@@ -4,7 +4,6 @@ from app.util.helper import Helper
 from sqlalchemy.exc import SQLAlchemyError
 from fastapi import HTTPException, Request
 from app.schema.auth_schema import RegisterUser
-import jwt
 
 db = SessionLocal()
 helper = Helper()

@@ -3,7 +3,7 @@ from fastapi import Response, HTTPException, Request, Depends
 from app.service.auth_service import AuthService
 from app.schema.auth_schema import LoginUser, RegisterUser
 from app.util.helper import Helper
-from typing import Annotated, Any
+from typing import Annotated
 from app.middleware.auth_middleware import auth_middleware
 from ..model import User
 
