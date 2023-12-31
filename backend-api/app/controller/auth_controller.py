@@ -1,9 +1,11 @@
 from fastapi import APIRouter
-from fastapi import Response, HTTPException, Request
+from fastapi import Response, HTTPException, Request, Depends
 from app.service.auth_service import AuthService
 from app.schema.auth_schema import LoginUser, RegisterUser
 from app.util.helper import Helper
-import jwt
+from typing import Annotated, Any
+from app.middleware.auth_middleware import auth_middleware
+from ..model import User
 
 auth_router = APIRouter()
 helper = Helper()
@@ -37,23 +39,14 @@ async def logout(response: Response) -> dict[str, str]:
 
 
 @auth_router.post("/verify")
-async def verify_user(request: Request):
-    try:
-        auth_header = request.cookies.get("access_token")
-        if auth_header is not None:
-            decoded_token = helper.decoded_token(auth_header=auth_header)
-            result = AuthService.find_user(id=int(decoded_token["user_id"]))
-            return {
-                "user": {
-                    "username": result.username,
-                    "email": result.email,
-                    "role": result.role.name,
-                }
-            }
-        else:
-            raise HTTPException(status_code=401, detail="Unauthorization")
-    except jwt.ExpiredSignatureError as e:
-        raise HTTPException(status_code=403, detail=str(e))
+async def verify_user(auth_user: Annotated[User, Depends(auth_middleware)]):
+    return {
+        "user": {
+            "username": auth_user.username,
+            "email": auth_user.email,
+            "role": auth_user.role.name,
+        }
+    }
 
 
 @auth_router.post("/refresh_token")
