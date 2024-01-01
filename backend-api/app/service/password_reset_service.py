@@ -24,10 +24,8 @@ class PasswordResetService:
 
     @staticmethod
     def check_token(token):
-        print(token)
         try:
             password_token = db.query(UserResetPassword).filter_by(token=token).first()
-            print("---")
             if password_token:
                 token_creation_time = password_token.created_time
                 # Şu anki zaman
