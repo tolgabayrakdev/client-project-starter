@@ -70,10 +70,21 @@ function AuthWrapper(WrapperComponent: any) {
       return (
         <section className="flex h-screen flex-col justify-center items-center text-xl">
           Sorry, your session has expired.
-          <Button className='mt-1 text-green-600' onClick={extendSession} type="default">
+          <Button
+            className="mt-1 text-green-600"
+            onClick={extendSession}
+            type="default"
+          >
             Extend your session
           </Button>
-          <Button className='mt-1 w-40 text-green-600' type="default" onClick={() => navigate("/authentication/login")}> Go to login page</Button>
+          <Button
+            className="mt-1 w-40 text-green-600"
+            type="default"
+            onClick={() => navigate('/authentication/login')}
+          >
+            {' '}
+            Go to login page
+          </Button>
         </section>
       );
     }

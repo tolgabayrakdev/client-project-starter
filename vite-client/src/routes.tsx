@@ -37,9 +37,9 @@ const routes = createBrowserRouter([
     children: [{ element: <AppIndexPage />, index: true }],
   },
   {
-    path: "/change_password/:reset_token",
-    element: <ChangePassword />
-  }
+    path: '/change_password/:reset_token',
+    element: <ChangePassword />,
+  },
 ]);
 
 export default routes;
